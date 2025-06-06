@@ -1,0 +1,266 @@
+{% doc %}
+  @prompt
+  make a size chart text . when some one click the size chart open a size chart modal the modal link with page
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+    .size-chart-trigger-{{ ai_gen_id }} {
+      display: inline-block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: {{ block.settings.text_size }}px;
+      color: {{ block.settings.text_color }};
+      cursor: pointer;
+    }
+
+    .size-chart-modal-{{ ai_gen_id }} {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .size-chart-modal-content-{{ ai_gen_id }} {
+      position: relative;
+      background-color: {{ block.settings.modal_background_color }};
+      margin: 10% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: {{ block.settings.modal_width }}px;
+      border-radius: {{ block.settings.modal_border_radius }}px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .size-chart-close-{{ ai_gen_id }} {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: {{ block.settings.text_color }};
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .size-chart-title-{{ ai_gen_id }} {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: {{ block.settings.title_size }}px;
+      color: {{ block.settings.title_color }};}
+
+    .size-chart-content-{{ ai_gen_id }} {
+      color: {{ block.settings.content_color }};
+    }
+    .size-chart-title-ayw9qmuvms3flujfqdaigenblock4ab292239axff{
+
+      border-bottom: 1px solid #d3cec5;
+      padding-bottom: 10px;
+    }
+  .size-chart-trigger-ayw9qmuvms3flujfqdaigenblock4ab292239axff {
+      cursor: pointer;
+      border: none!important;;
+      background: transparent!important;
+      font-style: italic!important;
+  }
+    @media screen and (max-width: 749px) {
+      .size-chart-modal-content-{{ ai_gen_id }} {
+        margin: 15% auto;
+        width: 95%;
+        padding: 20px;
+      }
+    }
+{% endstyle %}
+
+<size-chart-modal-{{ ai_gen_id }} {{ block.shopify_attributes }}>
+  <button type="button" class="size-chart-trigger-{{ ai_gen_id }}">
+    {{ block.settings.trigger_text }}
+  </button>
+
+  <div class="size-chart-modal-{{ ai_gen_id }}">
+    <div class="size-chart-modal-content-{{ ai_gen_id }}">
+      <button type="button" class="size-chart-close-{{ ai_gen_id }}" aria-label="Close size chart">&times;</button>
+
+      {% if block.settings.title != blank %}
+        <h2 class="size-chart-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      <div class="size-chart-content-{{ ai_gen_id }}">
+        {% if block.settings.size_chart_page != blank %}
+          {{ block.settings.size_chart_page.content }}
+        {% else %}
+          <p>Please select a page with size chart content in the theme editor.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</size-chart-modal-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SizeChartModal{{ai_gen_id}} extends HTMLElement {
+      constructor() {
+        super();
+        this.modal = this.querySelector('.size-chart-modal-{{ ai_gen_id }}');
+        this.trigger = this.querySelector('.size-chart-trigger-{{ ai_gen_id }}');
+        this.closeButton = this.querySelector('.size-chart-close-{{ ai_gen_id }}');}
+
+      connectedCallback() {
+        this.trigger.addEventListener('click', this.openModal.bind(this));
+        this.closeButton.addEventListener('click', this.closeModal.bind(this));
+        this.modal.addEventListener('click', this.handleOutsideClick.bind(this));
+        document.addEventListener('keydown', this.handleEscKey.bind(this));
+      }
+
+      disconnectedCallback() {
+        this.trigger.removeEventListener('click', this.openModal.bind(this));
+        this.closeButton.removeEventListener('click', this.closeModal.bind(this));
+        this.modal.removeEventListener('click', this.handleOutsideClick.bind(this));
+        document.removeEventListener('keydown', this.handleEscKey.bind(this));
+      }
+
+      openModal() {
+        this.modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeModal() {
+        this.modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      handleOutsideClick(event) {
+        if (event.target === this.modal) {
+          this.closeModal();
+        }
+      }
+
+      handleEscKey(event) {
+        if (event.key === 'Escape' && this.modal.style.display === 'block') {
+          this.closeModal();
+        }
+      }
+    }
+
+    customElements.define('size-chart-modal-{{ ai_gen_id }}', SizeChartModal{{ai_gen_id}});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Size Chart Modal",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "trigger_text",
+      "label": "Trigger text",
+      "default": "Size Chart"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Modal title",
+      "default": "Size Chart"
+    },
+    {
+      "type": "page",
+      "id": "size_chart_page",
+      "label": "Size chart page"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Trigger text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Trigger text color",
+      "default": "#000f9f"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content text color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Modal Style"
+    },
+    {
+      "type": "range",
+      "id": "modal_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Modal max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Modal border radius",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "modal_background_color",
+      "label": "Modal background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Chart Modal"
+    }
+  ]
+}
+{% endschema %}

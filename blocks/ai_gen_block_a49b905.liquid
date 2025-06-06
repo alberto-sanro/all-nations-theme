@@ -1,0 +1,788 @@
+{% doc %}
+  @prompt
+  make a full width split shocase section where 2 layout show left and right left side . main left side: top show a
+  image than show a subtitle, than show 2 div side by side div 1: Raw Material: India Processing: India Cut And Sew:
+  India div 2: Labels: India Hang Tag: India Packaging: India main right side top show image / icon/svg than show title
+  , than show sub title, than show descriptions, add 2 layout gap and padding system image size system. text size system
+  , text again system each , icon/image and title show Alignement in center and subtitle and description show Alignement
+  left , Description make rich text, main 2 layout height make make height , main left image automaticly grt width and
+  height and image cover , Section height, Column height, Left image, al are automatically set with 100% and height:
+  auto. , add background color and padding sustem in main 2 layout diffrent diffrent , add text weight system like:
+  normal, mediam, semibold,bold for text
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-split-showcase-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: {{ block.settings.section_gap }}px;}
+
+  @media screen and (max-width: 749px) {
+    .ai-split-showcase-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+  }
+
+  .ai-split-showcase__column-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.content_gap }}px;
+  }
+
+  .ai-split-showcase__left-column-{{ ai_gen_id }} {
+    background-color: {{ block.settings.left_background_color }};
+    padding: {{ block.settings.left_padding_top }}px {{ block.settings.left_padding_right }}px {{ block.settings.left_padding_bottom }}px {{ block.settings.left_padding_left }}px;
+  }
+
+  .ai-split-showcase__right-column-{{ ai_gen_id }} {
+    background-color: {{ block.settings.right_background_color }};
+    padding: {{ block.settings.right_padding_top }}px {{ block.settings.right_padding_right }}px {{ block.settings.right_padding_bottom }}px {{ block.settings.right_padding_left }}px;
+  }
+
+  .ai-split-showcase__image-container-{{ ai_gen_id }} {
+    width: 100%;
+    position: relative;
+    margin-bottom: {{ block.settings.image_bottom_margin }}px;
+  }
+
+  .ai-split-showcase__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-split-showcase__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-split-showcase__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 200px;
+  }
+
+  .ai-split-showcase__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    margin-bottom: {{ block.settings.subtitle_margin }}px;
+    color: {{ block.settings.subtitle_color }};
+    font-weight: {{ block.settings.subtitle_weight }};
+  }
+
+  .ai-split-showcase__details-container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.details_gap }}px;
+  }
+
+  .ai-split-showcase__details-column-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-split-showcase__detail-item-{{ ai_gen_id }} {
+    margin-bottom:8px;
+    font-size: {{ block.settings.details_text_size }}px;
+    color: {{ block.settings.details_text_color }};
+    font-weight: {{ block.settings.details_text_weight }};
+  }
+
+  .ai-split-showcase__detail-label-{{ ai_gen_id }} {
+    font-weight: {{ block.settings.details_label_weight }};
+  }
+
+  .ai-split-showcase__right-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;}
+
+  .ai-split-showcase__right-icon-title-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    margin-bottom: {{ block.settings.title_margin }}px;
+  }
+
+  .ai-split-showcase__icon-container-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+  .ai-split-showcase__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    text-align: center;
+    color: {{ block.settings.title_color }};
+  }
+
+  .ai-split-showcase__right-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.right_subtitle_size }}px;
+    margin-bottom: {{ block.settings.right_subtitle_margin }}px;
+    text-align: left;
+    color: {{ block.settings.right_subtitle_color }};
+    font-weight: {{ block.settings.right_subtitle_weight }};
+  }
+
+  .ai-split-showcase__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    text-align: left;
+    font-weight: {{ block.settings.description_weight }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-split-showcase__details-container-{{ ai_gen_id }} {
+      {% if block.settings.columns_mobile == 1 %}
+        flex-direction: column;
+      {% else %}
+        flex-direction: row;{% endif %}
+    }
+  }
+{% endstyle %}
+
+<div class="ai-split-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <!-- Left Column -->
+  <div class="ai-split-showcase__column-{{ ai_gen_id }} ai-split-showcase__left-column-{{ ai_gen_id }}">
+    <!-- Left Image -->
+    <div class="ai-split-showcase__image-container-{{ ai_gen_id }}">
+      {% if block.settings.left_image %}
+        <img
+          src="{{ block.settings.left_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.left_image.alt | escape }}"
+          loading="lazy"
+          class="ai-split-showcase__image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-split-showcase__image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+    <!-- Left Subtitle -->
+    <div class="ai-split-showcase__subtitle-{{ ai_gen_id }}">{{ block.settings.left_subtitle }}</div>
+
+    <!-- Two Divs Side by Side -->
+    <div class="ai-split-showcase__details-container-{{ ai_gen_id }}">
+      <!-- Div 1 -->
+      <div class="ai-split-showcase__details-column-{{ ai_gen_id }}">
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_1_label }}:</span>
+          {{ block.settings.detail_1_value }}
+        </div>
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_2_label }}:</span>
+          {{ block.settings.detail_2_value }}
+        </div>
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_3_label }}:</span>
+          {{ block.settings.detail_3_value }}
+        </div>
+      </div>
+
+      <!-- Div 2 -->
+      <div class="ai-split-showcase__details-column-{{ ai_gen_id }}">
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_4_label }}:</span>
+          {{ block.settings.detail_4_value }}
+        </div>
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_5_label }}:</span>
+          {{ block.settings.detail_5_value }}
+        </div>
+        <div class="ai-split-showcase__detail-item-{{ ai_gen_id }}">
+          <span class="ai-split-showcase__detail-label-{{ ai_gen_id }}">{{ block.settings.detail_6_label }}:</span>
+          {{ block.settings.detail_6_value }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="ai-split-showcase__column-{{ ai_gen_id }} ai-split-showcase__right-column-{{ ai_gen_id }}">
+    <div class="ai-split-showcase__right-content-{{ ai_gen_id }}">
+      <!-- Icon/Image and Title (Centered) -->
+      <div class="ai-split-showcase__right-icon-title-{{ ai_gen_id }}">
+        <div class="ai-split-showcase__icon-container-{{ ai_gen_id }}">
+          {% if block.settings.right_image %}
+            <img
+              src="{{ block.settings.right_image | image_url: width: block.settings.icon_size }}"
+              alt="{{ block.settings.right_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.icon_size }}"
+              height="{{ block.settings.icon_size }}"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+        <h2 class="ai-split-showcase__title-{{ ai_gen_id }}">{{ block.settings.right_title }}</h2>
+      </div>
+
+      <!-- Subtitle (Left Aligned) -->
+      <div class="ai-split-showcase__right-subtitle-{{ ai_gen_id }}">{{ block.settings.right_subtitle }}</div>
+
+      <!-- Description (Left Aligned) -->
+      <div class="ai-split-showcase__description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Split Showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "section_gap",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between columns",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Content gap",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile detail columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Left Column Settings"
+    },
+    {
+      "type": "color",
+      "id": "left_background_color",
+      "label": "Left column background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "left_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left padding top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "left_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left padding right",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "left_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left padding bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "left_padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left padding left",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "range",
+      "id": "image_bottom_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Image bottom margin",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "left_subtitle",
+      "label": "Left subtitle",
+      "default": "Manufacturing Details"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle font size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight",
+      "label": "Subtitle font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_margin",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Subtitle bottom margin",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Details Settings"
+    },
+    {
+      "type": "range",
+      "id": "details_gap",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between detail columns",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "details_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Details text size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "details_text_weight",
+      "label": "Details text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "details_label_weight",
+      "label": "Details label weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "details_text_color",
+      "label": "Details text color",
+      "default": "#555555"
+    },
+    {
+      "type": "text",
+      "id": "detail_1_label",
+      "label": "Detail 1 label",
+      "default": "Raw Material"
+    },
+    {
+      "type": "text",
+      "id": "detail_1_value",
+      "label": "Detail 1 value",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "detail_2_label",
+      "label": "Detail 2 label",
+      "default": "Processing"
+    },
+    {
+      "type": "text",
+      "id": "detail_2_value",
+      "label": "Detail 2 value",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "detail_3_label",
+      "label": "Detail 3 label",
+      "default": "Cut And Sew"
+    },
+    {
+      "type": "text",
+      "id": "detail_3_value",
+      "label": "Detail 3 value",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "detail_4_label",
+      "label": "Detail 4 label",
+      "default": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "detail_4_value",
+      "label": "Detail 4 value",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "detail_5_label",
+      "label": "Detail 5 label",
+      "default": "Hang Tag"
+    },
+    {
+      "type": "text",
+      "id": "detail_5_value",
+      "label": "Detail 5 value",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "detail_6_label",
+      "label": "Detail 6 label",
+      "default": "Packaging"
+    },
+    {
+      "type": "text",
+      "id": "detail_6_value",
+      "label": "Detail 6 value",
+      "default": "India"
+    },
+    {
+      "type": "header",
+      "content": "Right Column Settings"
+    },
+    {
+      "type": "color",
+      "id": "right_background_color",
+      "label": "Right column background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Right padding top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "right_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Right padding right",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "right_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Right padding bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "right_padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Right padding left",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right icon/image"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon/image size",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "Product Information"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "title_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Title bottom margin",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#222222"
+    },
+    {
+      "type": "text",
+      "id": "right_subtitle",
+      "label": "Right subtitle",
+      "default": "Quality Assurance"
+    },
+    {
+      "type": "range",
+      "id": "right_subtitle_size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Right subtitle font size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "right_subtitle_weight",
+      "label": "Right subtitle font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "right_subtitle_margin",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Right subtitle bottom margin",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "right_subtitle_color",
+      "label": "Right subtitle color",
+      "default": "#333333"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Our products are crafted with the highest quality materials and undergo rigorous quality checks at every stage of production. We take pride in our sustainable manufacturing processes and ethical labor practices.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "description_weight",
+      "label": "Description font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#555555"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Showcase"
+    }
+  ]
+}
+{% endschema %}

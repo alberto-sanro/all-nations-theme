@@ -1,0 +1,414 @@
+{% doc %}
+  @prompt
+  make a video full width section default video mute and auto play and in the video overly show a play button when user
+  click the play button video sound play or off video url comes from products page metafile and support any link like
+  shopify self hostedt , youtube , vimo,etc
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% liquid
+  assign video_url = product.metafields.custom.product_video.value
+  assign video_type = 'unknown'
+
+  if video_url contains 'youtube.com' or video_url contains 'youtu.be'
+    assign video_type = 'youtube'
+    if video_url contains 'watch?v='
+      assign video_id = video_url | split: 'watch?v=' | last | split: '&' | first
+    elsif video_url contains 'youtu.be/'
+      assign video_id = video_url | split: 'youtu.be/' | last
+    endif
+    assign video_url = 'https://www.youtube.com/embed/' | append: video_id | append: '?enablejsapi=1&autoplay=1&mute=1&controls=0&loop=1&playlist=' | append: video_id
+  elsif video_url contains 'vimeo.com'
+    assign video_type = 'vimeo'
+    assign video_id = video_url | split: 'vimeo.com/' | last
+    assign video_url = 'https://player.vimeo.com/video/' | append: video_id | append: '?autoplay=1&muted=1&background=1&loop=1'
+  else
+    assign video_type = 'mp4'
+  endif
+%}
+
+{% style %}
+  .ai-product-video-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.video_height }}px;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-video-container-{{ ai_gen_id }} {
+      height: {{ block.settings.video_height_mobile }}px;
+    }
+  }
+
+  .ai-product-video-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ai-product-video-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;}
+
+  .ai-product-video-iframe-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-product-video-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.background_color }};}
+
+  .ai-product-video-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    fill: {{ block.settings.play_button_color }};
+  }
+
+  .ai-product-video-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .ai-product-video-play-button-{{ ai_gen_id }} {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: {{ block.settings.play_button_background }};
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-product-video-play-button-{{ ai_gen_id }}:hover {
+    transform: scale(1.1);
+  }
+
+  .ai-product-video-play-icon-{{ ai_gen_id }} {
+    width: 30px;
+    height: 30px;
+    fill: {{ block.settings.play_button_color }};
+  }
+
+  .ai-product-video-sound-toggle-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: {{ block.settings.play_button_background }};
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-product-video-container-{{ ai_gen_id }}:hover .ai-product-video-sound-toggle-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-product-video-sound-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    fill: {{ block.settings.play_button_color }};
+  }
+{% endstyle %}
+
+<product-video-player-{{ ai_gen_id }}
+  class="ai-product-video-container-{{ ai_gen_id }}"
+  data-video-type="{{ video_type }}"
+  data-video-id="{{ video_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-video-wrapper-{{ ai_gen_id }}">
+    {% if video_url != blank %}
+      {% if video_type == 'youtube' or video_type == 'vimeo' %}
+        <iframe
+          class="ai-product-video-iframe-{{ ai_gen_id }}"
+          src="{{ video_url }}"
+          frameborder="0"
+          allowfullscreen
+          allow="autoplay; encrypted-media"
+          id="player-{{ ai_gen_id }}"
+        ></iframe>
+      {% elsif video_type == 'mp4' %}
+        <video
+          class="ai-product-video-{{ ai_gen_id }}"
+          id="player-{{ ai_gen_id }}"
+          autoplay
+          muted
+          loop
+          playsinline
+        >
+          <source src="{{ video_url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% endif %}
+    {% else %}
+      <div class="ai-product-video-placeholder-{{ ai_gen_id }}">
+        {{ 'image' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+    <div class="ai-product-video-overlay-{{ ai_gen_id }}">
+      <button class="ai-product-video-play-button-{{ ai_gen_id }}" aria-label="Play video">
+        <svg class="ai-product-video-play-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+    <button class="ai-product-video-sound-toggle-{{ ai_gen_id }}" aria-label="Toggle sound">
+      <svg class="ai-product-video-sound-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/>
+      </svg>
+    </button>
+  </div>
+</product-video-player-{{ ai_gen_id }}>
+<script>
+  (function() {
+    class ProductVideoPlayer extends HTMLElement {
+      constructor() {
+        super();
+        this.overlay = this.querySelector('.ai-product-video-overlay-{{ ai_gen_id }}');
+        this.playButton = this.querySelector('.ai-product-video-play-button-{{ ai_gen_id }}');
+        this.soundToggle = this.querySelector('.ai-product-video-sound-toggle-{{ ai_gen_id }}');
+        this.videoType = this.getAttribute('data-video-type');
+        this.videoId = this.getAttribute('data-video-id');
+        this.player = document.getElementById('player-{{ ai_gen_id }}');
+        this.isMuted = true;
+        this.isPlaying = true;
+      }
+
+      connectedCallback() {
+        if (this.videoType === 'unknown' || !this.player) return;
+        
+        this.setupEventListeners();
+        this.updateSoundIcon();
+      }
+
+      setupEventListeners() {
+        this.overlay.addEventListener('click', () => this.togglePlay());
+        this.soundToggle.addEventListener('click', () => this.toggleSound());
+        
+        if (this.videoType === 'youtube') {
+          this.setupYouTubeAPI();
+        } else if (this.videoType === 'vimeo') {
+          this.setupVimeoAPI();
+        }
+      }
+
+      setupYouTubeAPI() {
+        if (!window.YT) {
+          const tag = document.createElement('script');
+          tag.src = 'https://www.youtube.com/iframe_api';
+          const firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          
+          window.onYouTubeIframeAPIReady = () => {
+            this.initYouTubePlayer();
+          };
+        } else if (window.YT && window.YT.Player) {
+          this.initYouTubePlayer();
+        }
+      }
+      
+      initYouTubePlayer() {
+        this.ytPlayer = new YT.Player(`player-{{ ai_gen_id }}`, {
+          events: {
+            'onReady': () => {
+              this.ytPlayer.mute();
+              this.ytPlayer.playVideo();}
+          }
+        });
+      }
+      
+      setupVimeoAPI() {
+        if (!window.Vimeo) {
+          const tag = document.createElement('script');
+          tag.src = 'https://player.vimeo.com/api/player.js';
+          const firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          
+          tag.onload = () => {
+            this.initVimeoPlayer();
+          };
+        } else {
+          this.initVimeoPlayer();
+        }
+      }
+      
+      initVimeoPlayer() {
+        this.vimeoPlayer = new Vimeo.Player(`player-{{ ai_gen_id }}`);
+        this.vimeoPlayer.setVolume(0);
+        this.vimeoPlayer.play();
+      }
+
+      togglePlay() {
+        this.overlay.style.display = 'none';
+        if (this.videoType === 'mp4') {
+          if (this.player.paused) {
+            this.player.play();
+            this.isPlaying = true;
+          } else {
+            this.player.pause();
+            this.isPlaying = false;
+          }
+        } else if (this.videoType === 'youtube' && this.ytPlayer) {
+          if (this.isPlaying) {
+            this.ytPlayer.pauseVideo();
+            this.isPlaying = false;
+          } else {
+            this.ytPlayer.playVideo();
+            this.isPlaying = true;
+          }
+        } else if (this.videoType === 'vimeo' && this.vimeoPlayer) {
+          if (this.isPlaying) {
+            this.vimeoPlayer.pause();
+            this.isPlaying = false;
+          } else {
+            this.vimeoPlayer.play();
+            this.isPlaying = true;
+          }
+        }
+      }
+
+      toggleSound() {
+        this.isMuted = !this.isMuted;
+        
+        if (this.videoType === 'mp4') {
+          this.player.muted = this.isMuted;
+        } else if (this.videoType === 'youtube' && this.ytPlayer) {
+          if (this.isMuted) {
+            this.ytPlayer.mute();
+          } else {
+            this.ytPlayer.unMute();this.ytPlayer.setVolume(100);
+          }
+        } else if (this.videoType === 'vimeo' && this.vimeoPlayer) {
+          this.vimeoPlayer.setVolume(this.isMuted ? 0 : 1);
+        }
+        
+        this.updateSoundIcon();
+      }
+
+      updateSoundIcon() {
+        const soundIcon = this.soundToggle.querySelector('svg');
+        
+        if (this.isMuted) {
+          soundIcon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+        } else {
+          soundIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+        }
+      }
+    }
+
+    customElements.define('product-video-player-{{ ai_gen_id }}', ProductVideoPlayer);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Video",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Video URL should be added as a metafield with key 'product_video' in the product's custom namespace."
+    },
+    {
+      "type": "range",
+      "id": "video_height",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Video height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "video_height_mobile",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Video height on mobile",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay opacity",
+      "default": 0.3
+    },
+    {
+      "type": "color",
+      "id": "play_button_background",
+      "label": "Play button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "play_button_color",
+      "label": "Play button icon color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Video"
+    }
+  ]
+}
+{% endschema %}

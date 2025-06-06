@@ -1,0 +1,385 @@
+{% doc %}
+  @prompt
+  Build a Shopify section called icons-with-text that: ✅ Displays 4 columns ✅ Each columns has: an icon (image upload)
+  a heading (single-line text) a description (multi-line text or rich text) ✅ Uses a responsive layout (4 columns on
+  desktop, stacked on mobile) ✅ Includes section-wide settings for background color and padding ✅ Clean, minimal
+  design with centered text, make 5 columns , good work make section full width , Good Work . make separate mobile
+  version Section padding, Column padding and Space between columns.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .icons-with-text-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding }}px;background-color: {{ block.settings.background_color }};
+    width: 100%;max-width: 100%;
+  }
+
+  .icons-with-text__container-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: {{ block.settings.column_spacing }}px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .icons-with-text__column-{{ ai_gen_id }} {
+    flex: 1 1 calc(20% - {{ block.settings.column_spacing }}px);
+    min-width: calc(20% - {{ block.settings.column_spacing }}px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: {{ block.settings.column_padding }}px;
+  }
+
+  .icons-with-text__icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icons-with-text__icon-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .icons-with-text__icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+  .icons-with-text__icon-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .icons-with-text__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .icons-with-text__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .icons-with-text-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_mobile }}px;
+    }
+
+    .icons-with-text__container-{{ ai_gen_id }} {
+      flex-direction: column;gap: {{ block.settings.column_spacing_mobile }}px;
+    }
+
+    .icons-with-text__column-{{ ai_gen_id }} {
+      min-width: 100%;
+      padding: {{ block.settings.column_padding_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="icons-with-text-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="icons-with-text__container-{{ ai_gen_id }}">
+    {% for i in (1..5) %}
+      {% assign icon_key = 'icon_' | append: i %}
+      {% assign heading_key = 'heading_' | append: i %}
+      {% assign description_key = 'description_' | append: i %}
+
+      {% assign icon = block.settings[icon_key] %}
+      {% assign heading = block.settings[heading_key] %}
+      {% assign description = block.settings[description_key] %}
+
+      <div class="icons-with-text__column-{{ ai_gen_id }}">
+        <div class="icons-with-text__icon-wrapper-{{ ai_gen_id }}">
+          {% if icon != blank %}
+            <img
+              src="{{ icon | img_url: 'master' }}"
+              alt="{{ heading }}"
+              class="icons-with-text__icon-{{ ai_gen_id }}"
+              width="{{ block.settings.icon_size }}"
+              height="{{ block.settings.icon_size }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="icons-with-text__icon-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+        {% if heading != blank %}
+          <h3 class="icons-with-text__heading-{{ ai_gen_id }}">{{ heading }}</h3>
+        {% endif %}
+
+        {% if description != blank %}
+          <div class="icons-with-text__description-{{ ai_gen_id }}">{{ description }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Icons with Text",
+  "tag": null,
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "column_spacing",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between columns",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "column_padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Column padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Mobile Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding (mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "column_spacing_mobile",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between columns (mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "column_padding_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Column padding (mobile)",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon placeholder color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading",
+      "default": "Feature 1"
+    },
+    {
+      "type": "richtext",
+      "id": "description_1",
+      "label": "Description",
+      "default": "<p>Share information about this feature to highlight its value.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading",
+      "default": "Feature 2"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "Description",
+      "default": "<p>Share information about this feature to highlight its value.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Heading",
+      "default": "Feature 3"
+    },
+    {
+      "type": "richtext",
+      "id": "description_3",
+      "label": "Description",
+      "default": "<p>Share information about this feature to highlight its value.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Heading",
+      "default": "Feature 4"
+    },
+    {
+      "type": "richtext",
+      "id": "description_4",
+      "label": "Description",
+      "default": "<p>Share information about this feature to highlight its value.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_5",
+      "label": "Heading",
+      "default": "Feature 5"
+    },
+    {
+      "type": "richtext",
+      "id": "description_5",
+      "label": "Description",
+      "default": "<p>Share information about this feature to highlight its value.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons with Text"
+    }
+  ]
+}
+{% endschema %}

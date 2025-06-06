@@ -1,0 +1,299 @@
+{% doc %}
+  @prompt
+  "I want to make the product title, price, tax message dynamic using Shopify's Liquid templating system. The layout
+  should remain the same visually, but the data should come from the Shopify admin so it updates per product.
+  Specifically: Use {{ product.title }} for the product name. Use {{ product.price | money }} for the price display.
+  Show a 'includes duties' message conditionally (if products tax or duties seta or active show the message )., all in
+  same like in desktop example: products title, price and tax or duties same line and mobile title and price top than
+  the tax or duties show , price going down in desktop fix this , Always show tax message not working fix this , add a
+  vertical divider between products and price , make a under line all over the section. , vertical divider join, merge
+  or connect with the underline , fix mobile version, product title vertikal divider and price show in top than show the
+  underline after the show the Tax/duties message , again, you make mistake desktop version Tax/duties message show with
+  products title, divider, price and Tax/duties message in one line and in mobile version products title, dividier,
+  price than the under line after the underline show Tax/duties message , you make 2 Layout Desktop layout : all in one
+  line and Mobile layout: text message bellow underline and underline width based on top single content , desktop
+  Version layput show in single line products title, divider, price, Tax/Duties Message , everything okey just fix this
+  Underline connect, join , merge with vertical divider
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .product-info-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.margin_bottom }}px;
+  }
+
+  .product-info-container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 12px;
+    position: relative;
+  }
+
+  .product-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    padding: 0;
+  }
+
+  .vertical-divider-{{ ai_gen_id }} {
+    height: 24px;
+    width: 1px;
+    background-color: {{ block.settings.divider_color }};
+    position: relative;
+  }
+
+  .vertical-divider-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 12px;
+    background-color: {{ block.settings.divider_color }};
+    bottom: -12px;
+    left: 0;
+  }
+
+  .product-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: {{ block.settings.price_weight }};
+    color: {{ block.settings.price_color }};
+    margin: 0;
+    padding: 0;
+  }
+
+  .tax-message-{{ ai_gen_id }} {
+    font-size: {{ block.settings.tax_message_size }}px;
+    color: {{ block.settings.tax_message_color }};
+    margin: 0;
+    padding-left: 12px;
+  }
+
+  .underline-{{ ai_gen_id }} {
+    height: 1px;
+    background-color: {{ block.settings.underline_color }};
+    margin-top: 12px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-info-container-{{ ai_gen_id }} {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .mobile-wrapper-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .desktop-only-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .mobile-only-{{ ai_gen_id }} {
+      display: block;
+      margin-top: 8px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .mobile-only-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .desktop-only-{{ ai_gen_id }} {
+      display: block;
+    }
+  }
+{% endstyle %}
+
+<div class="product-info-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="mobile-wrapper-{{ ai_gen_id }}">
+    <div class="product-info-container-{{ ai_gen_id }}">
+      <h1 class="product-title-{{ ai_gen_id }}">{{ product.title }}</h1>
+      <div class="vertical-divider-{{ ai_gen_id }}"></div>
+      <div class="product-price-{{ ai_gen_id }}">{{ product.price | money }}</div>
+
+      {% if block.settings.show_tax_message %}
+        <div class="tax-message-{{ ai_gen_id }} desktop-only-{{ ai_gen_id }}">{{ block.settings.tax_message }}</div>
+      {% endif %}
+    </div>
+
+    <div class="underline-{{ ai_gen_id }}"></div>
+
+    {% if block.settings.show_tax_message %}
+      <div class="tax-message-{{ ai_gen_id }} mobile-only-{{ ai_gen_id }}">{{ block.settings.tax_message }}</div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Info Display",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Title"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#d3cec5"
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Price font size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "price_weight",
+      "label": "Price font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Underline"
+    },
+    {
+      "type": "color",
+      "id": "underline_color",
+      "label": "Underline color",
+      "default": "#d3cec5"
+    },
+    {
+      "type": "header",
+      "content": "Tax/Duties Message"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tax_message",
+      "label": "Show tax/duties message",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tax_message",
+      "label": "Tax/duties message",
+      "default": "Includes duties and taxes"
+    },
+    {
+      "type": "range",
+      "id": "tax_message_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Message font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "tax_message_color",
+      "label": "Message color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Info Display"
+    }
+  ]
+}
+{% endschema %}

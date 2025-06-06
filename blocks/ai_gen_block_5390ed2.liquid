@@ -1,0 +1,553 @@
+{% doc %}
+  @prompt
+  make a full width split shocase section where 2 layout show left and right left side . left side top show image /
+  icon/svg than show title , than show sub title, than show descriptions, right side show a dynamic image come from
+  products page metafiled and add 2 layout gap and padding system image size system. text size system , text again
+  system each , icon/image and title show Alignement in center and subtitle and description show Alignement left ,
+  Description make rich text
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-split-showcase-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: {{ block.settings.layout_order }};
+    width: 100%;
+    gap: {{ block.settings.layout_gap }}px;
+    padding: {{ block.settings.section_padding }}px;}
+
+  .ai-split-showcase-left-{{ ai_gen_id }},
+  .ai-split-showcase-right-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;}
+
+  .ai-split-showcase-left-{{ ai_gen_id }} {
+    gap: {{ block.settings.text_spacing }}px;
+    padding: {{ block.settings.text_padding }}px;
+  }
+
+  .ai-split-showcase-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: {{ block.settings.icon_spacing }}px;
+  }
+
+  .ai-split-showcase-icon-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+  .ai-split-showcase-icon-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-split-showcase-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight:600;
+    margin: 0;
+    color: {{ block.settings.title_color }};
+    text-align: center;}
+
+  .ai-split-showcase-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    font-weight: 500;
+    margin: 0;
+    color: {{ block.settings.subtitle_color }};
+    text-align: left;
+  }
+
+  .ai-split-showcase-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.5;
+    margin: 0;
+    color: {{ block.settings.description_color }};
+    text-align: left;
+  }
+
+  .ai-split-showcase-description-{{ ai_gen_id }} p {
+    margin: 0 0 1em;
+  }
+
+  .ai-split-showcase-description-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-split-showcase-right-{{ ai_gen_id }} {
+    padding: {{ block.settings.image_padding }}px;
+  }
+
+  .ai-split-showcase-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-split-showcase-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    max-width: {{ block.settings.image_max_width }}px;
+    object-fit: {{ block.settings.image_fit }};}
+
+  .ai-split-showcase-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-split-showcase-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-split-showcase-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: {{ block.settings.layout_gap_mobile }}px;
+      padding: {{ block.settings.section_padding_mobile }}px;
+    }
+
+    .ai-split-showcase-left-{{ ai_gen_id }} {
+      gap: {{ block.settings.text_spacing_mobile }}px;
+      padding: {{ block.settings.text_padding_mobile }}px;
+    }
+
+    .ai-split-showcase-right-{{ ai_gen_id }} {
+      padding: {{ block.settings.image_padding_mobile }}px;
+    }
+
+    .ai-split-showcase-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_mobile }}px;
+    }
+
+    .ai-split-showcase-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size_mobile }}px;
+    }
+
+    .ai-split-showcase-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size_mobile }}px;
+    }
+
+    .ai-split-showcase-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_mobile }}px;
+      height: {{ block.settings.icon_size_mobile }}px;
+      margin-bottom: {{ block.settings.icon_spacing_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-split-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-split-showcase-left-{{ ai_gen_id }}">
+    {% if block.settings.icon_image %}
+      <div class="ai-split-showcase-icon-wrapper-{{ ai_gen_id }}">
+        <img
+          src="{{ block.settings.icon_image | image_url: width: block.settings.icon_size }}"
+          alt="{{ block.settings.icon_image.alt | escape }}"
+          width="{{ block.settings.icon_size }}"
+          height="{{ block.settings.icon_size }}"
+          loading="lazy"
+          class="ai-split-showcase-icon-{{ ai_gen_id }}"
+        >
+      </div>
+    {% elsif block.settings.show_icon %}
+      <div class="ai-split-showcase-icon-wrapper-{{ ai_gen_id }}">
+        <div class="ai-split-showcase-icon-{{ ai_gen_id }}">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L1 21h22L12 2zm0 4.2L19.6 19H4.4L12 6.2zm18.8h-2v2h2v-2zm0-6h-2v4h2v-4z"/>
+          </svg>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.title != blank %}
+      <h2 class="ai-split-showcase-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    {% endif %}
+
+    {% if block.settings.subtitle != blank %}
+      <h3 class="ai-split-showcase-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</h3>
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="ai-split-showcase-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+    {% endif %}
+  </div>
+
+  <div class="ai-split-showcase-right-{{ ai_gen_id }}">
+    <div class="ai-split-showcase-image-wrapper-{{ ai_gen_id }}">
+      {% if product.metafields[block.settings.metafield_namespace][block.settings.metafield_key] %}
+        {% assign showcase_image = product.metafields[block.settings.metafield_namespace][block.settings.metafield_key] %}
+        <img
+          src="{{ showcase_image | image_url: width: block.settings.image_max_width }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          class="ai-split-showcase-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-split-showcase-image-placeholder-{{ ai_gen_id }}">
+          {{ 'product-apparel-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Split Showcase",
+  "tag": null,
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "layout_order",
+      "label": "Layout order",
+      "options": [
+        {
+          "value": "row",
+          "label": "Text left, Image right"
+        },
+        {
+          "value": "row-reverse",
+          "label": "Image left, Text right"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Space between columns",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "layout_gap_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Space between columns (mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Section padding (mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Left Side Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show default icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Custom icon/image"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon size (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Space after icon",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Space after icon (mobile)",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Feature Highlight"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 14,
+      "max": 42,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size (mobile)",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Why this matters"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size (mobile)",
+      "default": 18
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Add your description here. This text helps explain the benefits of your product or feature to your customers.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between text elements",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_spacing_mobile",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between text elements (mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "text_padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Text area padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_padding_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Text area padding (mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Right Side Image"
+    },
+    {
+      "type": "text",
+      "id": "metafield_namespace",
+      "label": "Metafield namespace",
+      "default": "custom"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Metafield key",
+      "default": "showcase_image"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 200,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum image width",
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Image area padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "image_padding_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Image area padding (mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000F9F"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Showcase"
+    }
+  ]
+}
+{% endschema %}
