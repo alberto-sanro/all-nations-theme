@@ -1,0 +1,1265 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "product": "{{ closest.product }}",
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "none",
+            "slideshow_controls_style": "dots",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "aspect_ratio": "1/1.25",
+            "media_radius": 0,
+            "extend_media": true,
+            "constrain_to_viewport": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "gap": 12,
+            "sticky_details_desktop": true,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "link": "",
+                "open_in_new_tab": false,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "disabled": true,
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-primary--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "disabled": true,
+                  "settings": {
+                    "product": "{{ closest.product }}",
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "ai_gen_block_4bbe9b2_8z6D7m": {
+                  "type": "ai_gen_block_4bbe9b2",
+                  "name": "Product Info Display",
+                  "settings": {
+                    "title_size": 20,
+                    "title_weight": "600",
+                    "title_color": "#243a7b",
+                    "divider_color": "#243a7b",
+                    "price_size": 18,
+                    "price_weight": "600",
+                    "price_color": "#243a7b",
+                    "underline_color": "#243a7b",
+                    "show_tax_message": true,
+                    "tax_message": "Includes duties",
+                    "tax_message_size": 14,
+                    "tax_message_color": "#243a7b",
+                    "margin_bottom": 0
+                  },
+                  "blocks": {}
+                },
+                "text_6YHrbY": {
+                  "type": "text",
+                  "name": "t:names.heading",
+                  "settings": {
+                    "text": "<h4><strong>{{ closest.product.metafields.custom.fabric.value }}</strong></h4>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "accordion_PtqNzz": {
+                  "type": "accordion",
+                  "name": "t:names.accordion",
+                  "settings": {
+                    "icon": "caret",
+                    "dividers": false,
+                    "type_preset": "h4",
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "accordion_row_CGmHV4": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Description",
+                        "open_by_default": true
+                      },
+                      "blocks": {
+                        "text_CAbE4w": {
+                          "type": "text",
+                          "settings": {
+                            "text": "{{ closest.product.description }}",
+                            "width": "100%",
+                            "max_width": "normal",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "text_CAbE4w"
+                      ]
+                    },
+                    "accordion_row_k7XH9w": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Details",
+                        "open_by_default": false
+                      },
+                      "blocks": {
+                        "text_XV6XWd": {
+                          "type": "text",
+                          "settings": {
+                            "text": "{{ closest.product.metafields.custom.products_details | metafield_tag }}",
+                            "width": "100%",
+                            "max_width": "normal",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "text_XV6XWd"
+                      ]
+                    }
+                  },
+                  "block_order": [
+                    "accordion_row_CGmHV4",
+                    "accordion_row_k7XH9w"
+                  ]
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg",
+                "ai_gen_block_4bbe9b2_8z6D7m",
+                "text_6YHrbY",
+                "accordion_PtqNzz"
+              ]
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "product": "{{ closest.product }}",
+                "variant_style": "buttons",
+                "show_swatches": true,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "custom_liquid_Up6BNp": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<div class=\"fit-assist-slider\">\n  <div class=\"fit-slider-container\">\n    <div class=\"fit-slider-steps\">\n      <div id=\"slim\" class=\"fit-step\">\n        <div data-value=\"slim\" class=\"dot\"></div>\n        <span>slim</span>\n      </div>\n      <div class=\"fit-step\">\n        <div data-value=\"slim-standard\" class=\"dot\"></div>\n        <span>&nbsp;</span>\n      </div>\n      <div class=\"fit-step\">\n        <div data-value=\"standard\" class=\"dot active\"></div>\n        <span>standard</span>\n      </div>\n      <div class=\"fit-step\">\n        <div data-value=\"standard-oversized\" class=\"dot\"></div>\n        <span>&nbsp;</span>\n      </div>\n      <div id=\"oversized\" class=\"fit-step\">\n        <div data-value=\"oversized\" class=\"dot\"></div>\n        <span>oversized</span>\n      </div>\n      <div class=\"connecting-line\"></div>\n    </div>\n  </div>\n</div>\n  <style>\n    .fit-assist-slider {\n      display: flex;\n      justify-content: left;\n      align-items: center;\n    }\n\n    .fit-slider-container {\n      width: 100%;\n      padding-top: 10px;\n      max-width: 330px;\n    }\n\n    @media (max-width: 1024px) {\n      .fit-slider-container {\n        max-width: calc(100% - 4px);\n        margin: 0 2px;\n      }\n    }\n\n    .fit-slider-steps {\n      position: relative;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    .fit-step {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      z-index: 2;\n      width: 100%;\n    }\n\n    .fit-step#slim {\n      width: 50%;\n      align-items: flex-start;\n    }\n\n    .fit-step#oversized {\n      width: 50%;\n      align-items: flex-end;\n    }\n\n    .dot {\n      width: 10px;\n      height: 10px;\n      background: #243a7b;\n      border: 2px solid #243a7b;\n      border-radius: 50%;\n      margin-bottom: 8px;\n    }\n\n    .dot.active {\n      width: 20px;\n      height: 20px;\n      background: #fff;\n    }\n\n    .fit-step span {\n      font-size: 12px;\n      text-align: center;\n      color: #243a7b;\n    }\n\n    .connecting-line {\n      position: absolute;\n      top: 9px;\n      left: 3px;\n      right: 3px;\n      height: 1px;\n      background: #243a7b;\n      z-index: 1;\n    }\n  </style>"
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_4ab2922_hnqkb9": {
+              "type": "ai_gen_block_4ab2922",
+              "name": "Size Chart Modal",
+              "settings": {
+                "trigger_text": "Size Chart",
+                "title": "Size Chart",
+                "size_chart_page": "size-chart",
+                "text_size": 14,
+                "text_color": "#000f9f",
+                "title_size": 24,
+                "title_color": "#243a7b",
+                "content_color": "rgba(0,0,0,0)",
+                "modal_width": 1100,
+                "modal_border_radius": 8,
+                "modal_background_color": "#ffffff"
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "product": "{{ closest.product }}",
+                "stacking": true,
+                "show_pickup_availability": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "product": "{{ closest.product }}"
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "product": "{{ closest.product }}",
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "product": "{{ closest.product }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "accordion_8nGKr8": {
+              "type": "accordion",
+              "name": "t:names.accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "type_preset": "h6",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_NWM7ah": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Wash & Care",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "text_tYxjNj": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.metafields.custom.wash_care | metafield_tag }}",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_tYxjNj"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_NWM7ah"
+              ]
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "variant_picker_R3rGDr",
+            "custom_liquid_Up6BNp",
+            "ai_gen_block_4ab2922_hnqkb9",
+            "buy_buttons_eYQEYi",
+            "accordion_8nGKr8"
+          ]
+        }
+      },
+      "custom_css": [
+        "@media (max-width: 767px) {.tax-message-azdqxrhi2u1jsv3dnraigenblock4bbe9b28z6d7m {padding-left: 0px !important; } .ai-split-showcase-atmtxnvf2vks3t0xzvaigenblock5390ed2cerkwk, .ai-split-showcase-awklwwlhgnmnjdfaytaigenblock5390ed2cgxrwj {padding: 8px 0 !important; } .ai-split-showcase-arevnmmloqkernxhrmaigenblock8d77ce9tddfwr {padding: 16px 0px !important; }}",
+        " button.size-chart-trigger-avwfjq05oa3jov3houaigenblock4ab2922hnqkb9 {border: none !important; background: transparent !important; font-style: italic !important; }"
+      ],
+      "settings": {
+        "product": "{{ closest.product }}",
+        "content_width": "content-full-width",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<p>You may also like </p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product": "{{ closest.product }}",
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "product": "{{ closest.product }}",
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_zGryyP": {
+              "type": "group",
+              "settings": {
+                "link": "",
+                "open_in_new_tab": false,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "product_title_Dk8awd": {
+                  "type": "product-title",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "product": "{{ closest.product }}",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_AUnDAd": {
+                  "type": "price",
+                  "settings": {
+                    "product": "{{ closest.product }}",
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "h6",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "swatches_yPCmba": {
+                  "type": "swatches",
+                  "settings": {
+                    "product": "{{ closest.product }}",
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 0,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "product_title_Dk8awd",
+                "price_AUnDAd",
+                "swatches_yPCmba"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "group_zGryyP"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 10,
+        "columns": 5,
+        "mobile_columns": "2",
+        "columns_gap": 3,
+        "rows_gap": 24,
+        "icons_style": "chevron_large",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "section_gPGxRa": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_8d77ce9_tddfwr": {
+          "type": "ai_gen_block_8d77ce9",
+          "name": "Split Showcase",
+          "settings": {
+            "layout_direction": "row",
+            "gap": 20,
+            "padding": 0,
+            "border_radius": 0,
+            "mobile_gap": 16,
+            "mobile_padding": 16,
+            "image_width": 1000,
+            "image_aspect_ratio": 100,
+            "image_fit": "cover",
+            "metafield_namespace_1": "custom",
+            "metafield_key_1": "left_image",
+            "metafield_namespace_2": "custom",
+            "metafield_key_2": "right_image"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8d77ce9_tddfwr"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_BiiXHq": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_5390ed2_CErkWk": {
+          "type": "ai_gen_block_5390ed2",
+          "name": "Split Showcase",
+          "settings": {
+            "layout_order": "row",
+            "layout_gap": 0,
+            "layout_gap_mobile": 16,
+            "section_padding": 12,
+            "section_padding_mobile": 8,
+            "show_icon": true,
+            "icon_image": "shopify://shop_images/svgexport-21.svg",
+            "icon_size": 60,
+            "icon_size_mobile": 40,
+            "icon_spacing": 16,
+            "icon_spacing_mobile": 12,
+            "title": "The Craft",
+            "title_size": 32,
+            "title_size_mobile": 24,
+            "subtitle": "100% natural pigments &/or mordants to dye fibers and garments",
+            "subtitle_size": 20,
+            "subtitle_size_mobile": 18,
+            "description": "<p>The craft of naturally dyed textile production and pesticide-free cotton cultivation goes back thousands of years, with strong roots in the Indian subcontinent. The origins of vegetable dyeing in India can be traced to the Indus Valley around the 4th millenium B.C. Thousands of years later, the synthesis of petroleum-based dyes proliferated in the 1870’s, bringing an end to widespread use of natural processes.</p><p>Shortsightedly convenient and inexpensive GMO & pesticide heavy cotton, petroleum-based dyes, and exploited garment manufacturing labor, has largely replaced the sustainable craft of milled organic cotton, colored with natural dyes, cut and sewn into finished garments with integrity. This shift has spoiled the natural world for more than a century, causing drastic consequences to garment workers and our environment.</p><p>Through the Clean Clothes project, we aim to create dialogue and research for two primary goals: 1) to respect and advocate for the usage of pesticide-free, non-GMO organic cotton; and 2) if dyeing is necessary, to use only 100% natural dyes. By issuing constraints on dyeing and washing processes, not only can we assure Clean Clothes on our skin, but cleaner rivers, oceans, soil, and air for everyone.</p>",
+            "description_size": 16,
+            "description_size_mobile": 14,
+            "text_spacing": 16,
+            "text_spacing_mobile": 12,
+            "text_padding": 12,
+            "text_padding_mobile": 8,
+            "metafield_namespace": "custom",
+            "metafield_key": "the_craft",
+            "image_max_width": 900,
+            "image_fit": "cover",
+            "image_border_radius": 0,
+            "image_padding": 0,
+            "image_padding_mobile": 0,
+            "icon_color": "#243a7b",
+            "title_color": "#243a7b",
+            "subtitle_color": "#243a7b",
+            "description_color": "#243a7b"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5390ed2_CErkWk"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_ypVcfc": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_c32cf1f_F9VKgc": {
+          "type": "ai_gen_block_c32cf1f",
+          "name": "Product Video",
+          "settings": {
+            "video_height": 600,
+            "video_height_mobile": 400,
+            "background_color": "#000000",
+            "overlay_opacity": 0.3,
+            "play_button_background": "#ffffff",
+            "play_button_color": "#000000"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c32cf1f_F9VKgc"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_jYmCQd": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_5390ed2_cGXRWj": {
+          "type": "ai_gen_block_5390ed2",
+          "settings": {
+            "layout_order": "row-reverse",
+            "layout_gap": 0,
+            "layout_gap_mobile": 16,
+            "section_padding": 12,
+            "section_padding_mobile": 8,
+            "show_icon": true,
+            "icon_image": "shopify://shop_images/svgexport-22.svg",
+            "icon_size": 60,
+            "icon_size_mobile": 40,
+            "icon_spacing": 16,
+            "icon_spacing_mobile": 12,
+            "title": "The Land",
+            "title_size": 32,
+            "title_size_mobile": 24,
+            "subtitle": "Home to the world's finest organic cotton",
+            "subtitle_size": 20,
+            "subtitle_size_mobile": 18,
+            "description": "<p>The Indian subcontinent extends from the Himalayas in the North to the coastal plains of the South. Scientists believe that cotton was first cultivated in the Indus Delta, circa 6,000 B.C. India’s landscapes are highly conducive for cotton-growing, however only less than 1% of cotton grown is pesticide free and non GMO. This stark contrast has sparked all the more reason for the evolution of the Clean Clothes project, dedicated to the production of quality garments in a sustainable way.</p><p>Farming cotton requires significant amounts of water. Toxic runoff from synthetic fertilizers and pesticides have catastrophically polluted water systems in India for decades. Organic cotton crops retain water more efficiently due to organic matter in the soil and most importantly filter and cycle precious resources. This is extremely important for certain regions of India, where there is a severe scarcity of water.</p>",
+            "description_size": 16,
+            "description_size_mobile": 14,
+            "text_spacing": 16,
+            "text_spacing_mobile": 12,
+            "text_padding": 12,
+            "text_padding_mobile": 8,
+            "metafield_namespace": "custom",
+            "metafield_key": "the_craft",
+            "image_max_width": 900,
+            "image_fit": "cover",
+            "image_border_radius": 0,
+            "image_padding": 0,
+            "image_padding_mobile": 0,
+            "icon_color": "#000f9f",
+            "title_color": "#243a7b",
+            "subtitle_color": "#243a7b",
+            "description_color": "#243a7b"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5390ed2_cGXRWj"
+      ],
+      "custom_css": [
+        ".ai-split-showcase-left-awklwwlhgnmnjdfaytaigenblock5390ed2cgxrwj {gap: 16px; padding: 0 20px !important;}"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-934c4e75-5aec-466b-81db-bf68e417e68b",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_mFnwd8": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_5390ed2_8GgKtC": {
+          "type": "ai_gen_block_5390ed2",
+          "settings": {
+            "layout_order": "row",
+            "layout_gap": 0,
+            "layout_gap_mobile": 16,
+            "section_padding": 12,
+            "section_padding_mobile": 8,
+            "show_icon": true,
+            "icon_image": "shopify://shop_images/svgexport-23.svg",
+            "icon_size": 60,
+            "icon_size_mobile": 40,
+            "icon_spacing": 16,
+            "icon_spacing_mobile": 12,
+            "title": "The Process",
+            "title_size": 32,
+            "title_size_mobile": 24,
+            "subtitle": "Less process, better for all",
+            "subtitle_size": 20,
+            "subtitle_size_mobile": 18,
+            "description": "<p>Why bleach or dye a fiber which is originally beautiful? Why spend resources and release wasteful, toxic discharges to change the characteristics of a natural product? IOAN undyed products are made from top quality local organic cotton, loomed in its original state, cut and sewn into garments, and washed in an enzyme water mixed to stabilize its proportions ( pre-shrunk) and to achieve the desired softness.<br/><br/></p>",
+            "description_size": 16,
+            "description_size_mobile": 14,
+            "text_spacing": 16,
+            "text_spacing_mobile": 12,
+            "text_padding": 12,
+            "text_padding_mobile": 8,
+            "metafield_namespace": "custom",
+            "metafield_key": "the_craft",
+            "image_max_width": 900,
+            "image_fit": "cover",
+            "image_border_radius": 0,
+            "image_padding": 0,
+            "image_padding_mobile": 0,
+            "icon_color": "#000f9f",
+            "title_color": "#243a7b",
+            "subtitle_color": "#243a7b",
+            "description_color": "#243a7b"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5390ed2_8GgKtC"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-934c4e75-5aec-466b-81db-bf68e417e68b",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_g3LG3M": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_a49b905_iNiqtV": {
+          "type": "ai_gen_block_a49b905",
+          "settings": {
+            "section_gap": 30,
+            "content_gap": 20,
+            "columns_mobile": "1",
+            "left_background_color": "#ffffff",
+            "left_padding_top": 50,
+            "left_padding_right": 50,
+            "left_padding_bottom": 50,
+            "left_padding_left": 50,
+            "left_image": "shopify://shop_images/IOAN-MAP-NATURAL-DYES1_1.jpg",
+            "image_bottom_margin": 20,
+            "left_subtitle": "All within a perfect environment, working to bring production back to the original makers.",
+            "subtitle_size": 18,
+            "subtitle_weight": "500",
+            "subtitle_margin": 15,
+            "subtitle_color": "#243a7b",
+            "details_gap": 20,
+            "details_text_size": 14,
+            "details_text_weight": "400",
+            "details_label_weight": "400",
+            "details_text_color": "#243a7b",
+            "detail_1_label": "Raw Material",
+            "detail_1_value": "India",
+            "detail_2_label": "Processing",
+            "detail_2_value": "India",
+            "detail_3_label": "Cut And Sew",
+            "detail_3_value": "India",
+            "detail_4_label": "Labels",
+            "detail_4_value": "India",
+            "detail_5_label": "Hang Tag",
+            "detail_5_value": "India",
+            "detail_6_label": "Packaging",
+            "detail_6_value": "India",
+            "right_background_color": "#f3f5f4",
+            "right_padding_top": 30,
+            "right_padding_right": 30,
+            "right_padding_bottom": 30,
+            "right_padding_left": 30,
+            "right_image": "shopify://shop_images/svgexport-24.svg",
+            "icon_size": 80,
+            "right_title": "The People",
+            "title_size": 24,
+            "title_weight": "700",
+            "title_margin": 20,
+            "title_color": "#243a7b",
+            "right_subtitle": "From the land to the finished product",
+            "right_subtitle_size": 18,
+            "right_subtitle_weight": "600",
+            "right_subtitle_margin": 15,
+            "right_subtitle_color": "#243a7b",
+            "description": "<p>Organic cotton farmers reject the use of synthetic pesticides, fertilizers and the use of GMO seeds. They are a deeply entrenched cultural cornerstone in the history of India. This vast community of growers on the Indian Peninsula produce a majority of the global organic cotton supply. Women and men work alongside in a diverse series of settings, from the organic cotton fields in central India, to yarn spinning, fabric looming and clothes making in urban environments... Together creating a network of like minded people where each unit or team brings the elements needed to achieve the most perfect organic cotton garment.<br/><br/></p>",
+            "description_size": 18,
+            "description_weight": "400",
+            "description_color": "#243a7b"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a49b905_iNiqtV"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-934c4e75-5aec-466b-81db-bf68e417e68b",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_cbLibL": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_6ac98bc_MJLJwd": {
+          "type": "ai_gen_block_6ac98bc",
+          "settings": {
+            "image": "shopify://shop_images/Undyed-Organic-Cotton-The_Land3_2.jpg",
+            "image_position": "center center",
+            "desktop_height": 500,
+            "mobile_height": 350,
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30,
+            "heading": "",
+            "subheading": "",
+            "text_alignment": "center",
+            "text_width": 500,
+            "heading_size": 48,
+            "text_size": 18,
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "button_label": "",
+            "button_link": "",
+            "button_color": "#000f9f",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#000000",
+            "button_border_radius": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6ac98bc_MJLJwd"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_wgmL76": {
+      "type": "section",
+      "blocks": {
+        "ai_gen_block_51392ca_mNGpHp": {
+          "type": "ai_gen_block_51392ca",
+          "settings": {
+            "padding": 60,
+            "column_spacing": 30,
+            "column_padding": 20,
+            "padding_mobile": 30,
+            "column_spacing_mobile": 20,
+            "column_padding_mobile": 15,
+            "background_color": "#ffffff",
+            "heading_color": "#243a7b",
+            "text_color": "#243a7b",
+            "icon_color": "#243a7b",
+            "heading_size": 20,
+            "text_size": 14,
+            "icon_size": 120,
+            "icon_1": "shopify://shop_images/Image_from_iOS.jpg",
+            "heading_1": "",
+            "description_1": "<p><strong>Re-invigorating, re-introducing local ancestral techniques, adapting to modern need.</strong></p>",
+            "icon_2": "shopify://shop_images/icon_made-at-the-source.png",
+            "heading_2": "",
+            "description_2": "<p><strong>From the ground to the finished product, made at the source of the raw materials.</strong></p>",
+            "icon_3": "shopify://shop_images/icon_enviromentally-safe.png",
+            "heading_3": "",
+            "description_3": "<p><strong>Organic, recycled or biodegradable materials and processes.</strong></p>",
+            "icon_4": "shopify://shop_images/icon_fair-wages.png",
+            "heading_4": "",
+            "description_4": "<p><strong>Worldwide team members and partners receive more than average wages and salaries.</strong></p>",
+            "icon_5": "shopify://shop_images/icon_face-to-face.png",
+            "heading_5": "",
+            "description_5": "<p><strong>No intermediaries or agents, every production is developed and monitored by IOAN.</strong></p>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_51392ca_mNGpHp"
+      ],
+      "name": "t:names.custom_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_qggXJq",
+    "section_gPGxRa",
+    "section_BiiXHq",
+    "section_ypVcfc",
+    "section_jYmCQd",
+    "section_mFnwd8",
+    "section_g3LG3M",
+    "section_cbLibL",
+    "section_wgmL76"
+  ]
+}
